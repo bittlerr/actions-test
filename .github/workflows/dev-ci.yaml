@@ -68,7 +68,7 @@ jobs:
           KUBE_CONTEXT: default
 
       - name: Switch to default context
-        run: kubectl config use-context default
+        run: ls -la ~/.kube
 
       - uses: swdotcom/update-and-apply-kubernetes-configs@v1
         with:
