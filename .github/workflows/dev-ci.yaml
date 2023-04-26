@@ -79,4 +79,4 @@ jobs:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
           KUBE_CONTEXT: default
         with:
-          args: get pods
+          args: config view
