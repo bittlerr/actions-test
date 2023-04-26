@@ -70,12 +70,20 @@ jobs:
           output: .kube/deployment.yaml
 
       - name: Cat kube config
-        run: cat .kube/deployment.yaml
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+          KUBE_CONTEXT: ${{ secrets.KUBE_CONTEXT }}
+          KUBE_CONTEXT_V: ${{ vars.KUBE_CONTEXT }}
+        run: |
+          cat .kube/deployment.yaml
+          echo $KUBE_CONTEXT
+          echo $KUBE_CONFIG
+          echo $KUBE_CONTEXT_V
 
       - name: K3S apply
         uses: actions-hub/kubectl@master
         env:
-          KUBE_CONFIG: ${{ env.KUBE_CONFIG }}
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
           KUBE_CONTEXT: default
         with:
           args: get nodes
