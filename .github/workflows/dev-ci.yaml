@@ -66,6 +66,7 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
           KUBE_CONTEXT: default
-          IMAGE_D: ${{ steps.meta.outputs.tags[0] }}
+          IMAGE_D: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
+          IMAGE_DO: ${{ env.DOCKER_METADATA_OUTPUT_TAGS }}
         with:
           args: get nodes
