@@ -66,7 +66,13 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
           KUBE_CONTEXT: default
-          IMAGE_D: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
-          IMAGE_DO: ${{ env.DOCKER_METADATA_OUTPUT_TAGS }}
+
+      - name: Switch to default context
+        run: kubectl config use-context default
+
+      - uses: swdotcom/update-and-apply-kubernetes-configs@v1
         with:
-          args: get nodes
+          k8-config-file-paths: .kube/deployment.yaml
+          replacement-method: defined
+        env:
+          IMAGE_WITH_TAG: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
