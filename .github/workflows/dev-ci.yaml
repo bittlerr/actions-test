@@ -19,13 +19,7 @@ jobs:
   #         images: |
   #           ghcr.io/bittlerr/actions-test
   #         tags: |
-  #           type=schedule
-  #           type=ref,event=branch
-  #           type=ref,event=pr
   #           type=semver,pattern={{version}}
-  #           type=semver,pattern={{major}}.{{minor}}
-  #           type=semver,pattern={{major}}
-  #           type=sha
 
   #     - name: Set up QEMU
   #       uses: docker/setup-qemu-action@v2
@@ -53,14 +47,25 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment: dev
+    # needs: build
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: |
+            ghcr.io/bittlerr/actions-test
+          tags: |
+            type=semver,pattern={{version}}
 
       - name: K3S apply
         uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
           KUBE_CONTEXT: default
+          IMAGE_D: ${{ steps.meta.outputs.tags[0] }}
         with:
           args: get nodes
