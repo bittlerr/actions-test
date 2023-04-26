@@ -68,11 +68,11 @@ jobs:
           KUBE_CONTEXT: default
 
       - name: Switch to default context
-        run: ls -la ~/.kube
+        run: ls -la
 
-      - uses: swdotcom/update-and-apply-kubernetes-configs@v1
-        with:
-          k8-config-file-paths: .kube/deployment.yaml
-          replacement-method: defined
-        env:
-          IMAGE_WITH_TAG: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
+      # - uses: swdotcom/update-and-apply-kubernetes-configs@v1
+      #   with:
+      #     k8-config-file-paths: .kube/deployment.yaml
+      #     replacement-method: defined
+      #   env:
+      #     IMAGE_WITH_TAG: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
