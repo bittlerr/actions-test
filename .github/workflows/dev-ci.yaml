@@ -75,4 +75,4 @@ jobs:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
           KUBE_CONTEXT: default
         with:
-          args: apply -f .kube/deployment.yaml
+          args: apply -f .kube
