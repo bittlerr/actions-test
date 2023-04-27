@@ -84,6 +84,9 @@ jobs:
           input: .kube/deployments.yaml
           output: .kube/deployments.yaml
 
+      - name: Check subst
+        run: cat .kube/deployments.yaml
+
       - name: K3S apply
         uses: actions-hub/kubectl@master
         env:
