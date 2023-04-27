@@ -81,8 +81,8 @@ jobs:
           STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
           STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
         with:
-          input: .kube/deployment.yaml
-          output: .kube/deployment.yaml
+          input: .kube/deployments.yaml
+          output: .kube/deployments.yaml
 
       - name: K3S apply
         uses: actions-hub/kubectl@master
