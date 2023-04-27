@@ -3,7 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const { createClient } = require("redis");
 const app = express();
-const port = 3001;
+const port = 3000;
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
