@@ -65,6 +65,21 @@ jobs:
         uses: danielr1996/envsubst-action@1.1.0
         env:
           IMAGE_WITH_TAG: ${{ fromJSON(steps.meta.outputs.json).tags[0] }}
+          NODE_ENV: development
+          PDF_MODE: ${{ vars.PDF_MODE }}
+          CORS_ORIGIN: ${{ vars.CORS_ORIGIN }}
+          HOST: ${{ vars.HOST }}
+          MAILER_HOST: ${{ vars.MAILER_HOST }}
+          MAILER_PORT: ${{ vars.MAILER_PORT }}
+          MAILER_SECURE: ${{ vars.MAILER_SECURE }}
+          MAILER_USER: ${{ vars.MAILER_USER }}
+          STRIPE_SUCCESS_URL: ${{ vars.STRIPE_SUCCESS_URL }}
+          STRIPE_CANCEL_URL: ${{ vars.STRIPE_CANCEL_URL }}
+          MONGODB_URI: ${{ secrets.MONDODB_URI }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          MAILER_PASS: ${{ secrets.MAILER_PASS }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
         with:
           input: .kube/deployment.yaml
           output: .kube/deployment.yaml
